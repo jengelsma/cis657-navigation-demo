@@ -1,14 +1,15 @@
+import { Button, Input } from "react-native-elements";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { Input } from "react-native-elements";
-
-const ProfileEditScreen = () => {
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [description, setDescription] = useState(""); 
-
-
+const ProfileEditScreen = ({route, navigation}) => {
+  const initialName = route.params.name;
+  const initialImageUrl = route.params.imageUrl;
+  const initialDescription = route.params.description;
+  const [name, setName] = useState(initialName);
+  const [imageUrl, setImageUrl] = useState(initialImageUrl);
+  const [description, setDescription] = useState(initialDescription);
+  
   return (
     <View>
       <Input placeholder="Enter name" value={name} onChangeText={setName} />
@@ -22,6 +23,12 @@ const ProfileEditScreen = () => {
         value={description}
         onChangeText={setDescription}
         multiline={true}
+      />
+      <Button
+        title="Save Changes"
+        onPress={() => {
+          navigation.navigate("Profile", { name, imageUrl, description });
+        }}
       />
     </View>
   );

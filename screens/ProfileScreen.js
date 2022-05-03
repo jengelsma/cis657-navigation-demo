@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { Button } from "react-native-elements";
 import { Card } from "react-native-elements";
 
-const ProfileScreen = ({navigation}) => {
+const ProfileScreen = ({route, navigation}) => {
   const [name, setName] = useState("Hudsonville Honey");
   const [imageUrl, setImageUrl] = useState(
     "https://hudsonvillehoney.com//wp-content/uploads/2014/03/PB285718.jpg"
@@ -12,6 +12,22 @@ const ProfileScreen = ({navigation}) => {
   const [description, setDescription] = useState(
     "Welcome to the wonderfully fascinating and sweet world of beekeeping!"
   );
+
+  useEffect(() => {
+    console.log("Profile: called anytime a specific state variable changes");
+    if (route.params?.name) {
+      setName(route.params.name);
+    }
+    if (route.params?.imageUrl) {
+      setImageUrl(route.params.imageUrl);
+    }
+    if (route.params?.description) {
+      setDescription(route.params.description);
+    }
+  }, [route.params?.name, route.params?.imageUrl, route.params?.description]);
+
+
+
 
 
   return (
@@ -23,7 +39,10 @@ const ProfileScreen = ({navigation}) => {
       </Card>
       <Button
         title="Go to Edit"
-        onPress={() => navigation.push("ProfileEdit")}
+        onPress={() => navigation.navigate
+          ("ProfileEdit",
+          {name, imageUrl, description}
+        )}
       />
     </View>
   );
