@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Button, Card } from '@rneui/themed';
 
-import { Button } from "react-native-elements";
-import { Card } from "react-native-elements";
-
-const ProfileScreen = ({route, navigation}) => {
-  const [name, setName] = useState("Hudsonville Honey");
+const ProfileScreen = ({ route, navigation }) => {
+  const [name, setName] = useState('Hudsonville Honey');
   const [imageUrl, setImageUrl] = useState(
-    "https://hudsonvillehoney.com//wp-content/uploads/2014/03/PB285718.jpg"
+    'https://hudsonvillehoney.com//wp-content/uploads/2014/03/PB285718.jpg'
   );
   const [description, setDescription] = useState(
-    "Welcome to the wonderfully fascinating and sweet world of beekeeping!"
+    'Welcome to the wonderfully fascinating and sweet world of beekeeping!'
   );
 
   useEffect(() => {
-    console.log("Profile: called anytime a specific state variable changes");
+    console.log('Profile: called anytime a specific state variable changes');
     if (route.params?.name) {
       setName(route.params.name);
     }
@@ -26,10 +24,6 @@ const ProfileScreen = ({route, navigation}) => {
     }
   }, [route.params?.name, route.params?.imageUrl, route.params?.description]);
 
-
-
-
-
   return (
     <View>
       <Card>
@@ -38,11 +32,10 @@ const ProfileScreen = ({route, navigation}) => {
         <Text style={{ marginBottom: 10 }}>{description}</Text>
       </Card>
       <Button
-        title="Go to Edit"
-        onPress={() => navigation.navigate
-          ("ProfileEdit",
-          {name, imageUrl, description}
-        )}
+        title='Go to Edit'
+        onPress={() =>
+          navigation.navigate('ProfileEdit', { name, imageUrl, description })
+        }
       />
     </View>
   );
